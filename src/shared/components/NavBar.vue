@@ -1,12 +1,19 @@
 <script setup lang="ts">
 
+const props = defineProps({
+    title: {
+        type: String,
+        default: 'Hola Mundo'
+    }
+});
+
 </script>
 
 
 <template>
     <nav>
         <img src="@/assets/logo.svg" alt="Vue Logo" width="25">
-        <span>Algo</span>
+        <span>{{ props.title }}</span>
         <RouterLink to="/">Inicio</RouterLink>
         <RouterLink to="/about">Sobre</RouterLink>
     </nav>
