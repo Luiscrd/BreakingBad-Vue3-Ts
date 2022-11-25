@@ -10,6 +10,7 @@ const router = createRouter({
     routes: [
         {path: '/', name: 'home', component: HomePage},
         {path: '/about', name: 'about', component: AboutPage},
+        {...characterRoute, path: '/characters'},
         // {
         //     path: '/characters',
         //     name: 'characters',
@@ -19,6 +20,7 @@ const router = createRouter({
     ]
 });
 
-router.addRoute(characterRoute);
+// path: '/characters'
+// router.addRoute(characterRoute);
 
 export default router;
