@@ -2,8 +2,6 @@
 import { RouterView } from 'vue-router';
 import NavBar from '@/shared/components/NavBar.vue'
 import { routerLinks } from './router/link-routes';
-
-
 </script>
 
 <template>

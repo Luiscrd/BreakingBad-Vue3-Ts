@@ -9,8 +9,23 @@ export const characterRoute: RouteRecordRaw = {
     redirect: '/characters/list',
     component: CharaterLayout,
     children: [
-        { path: 'by/id', name: 'character-id', component: CharaterId },
-        { path: 'list', name: 'character-list', component: CharaterList },
-        { path: 'search', name: 'character-search', component: CharaterSearch },
+        {
+            path: 'by/id',
+            name: 'character-id', 
+            component: CharaterId,
+            props: { title: 'Por Id', visible: false }
+        },
+        { 
+            path: 'list',
+            name: 'character-list',
+            component: CharaterList,
+            props: { title: 'Lista', visible: true }
+        },
+        { 
+            path: 'search',
+            name: 'character-search',
+            component: CharaterSearch,
+            props: { title: 'Busqueda', visible: true }
+        },
     ]
 }
