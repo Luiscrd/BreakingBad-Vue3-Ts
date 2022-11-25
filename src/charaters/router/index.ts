@@ -12,7 +12,7 @@ const router = createRouter({
         {
             path: '/characters',
             name: 'characters',
-            component: () => import('@/charaters/layout/CharaterLayout.vue')
+            component: () => import('@/charaters/layout/CharaterLayout.vue'),
         },
         {path: '/:pathMatch(.*)*', redirect: () => ({ name: 'home'})},
     ]
