@@ -29,3 +29,12 @@ a,
     padding: 0 2rem;
   }
 }
+
+.router-link-active {
+  color: #a09c9c !important;
+  text-decoration: underline !important;
+}
+
+.router-link-exact-active {
+  text-decoration: none !important;
+}
