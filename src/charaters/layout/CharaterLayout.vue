@@ -10,7 +10,7 @@ const routerLinks: RouterLink[] = characterRoute.children!
     return{
         name: route.name as string,
         path: route.path,
-        title: (route.props as { title: string, visible: boolean }).title
+        title: (route.props as { title: string }).title
     }
 })
 
@@ -18,7 +18,8 @@ const routerLinks: RouterLink[] = characterRoute.children!
 
 <template>
     <h1>Personajes</h1>
-    <NavBar title="Prueba" :links="routerLinks" :show-icon="false"/>
+    <NavBar title="Personajes" :links="routerLinks" :show-icon="false"/>
+    <hr>
     <RouterView />
 </template>
 

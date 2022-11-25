@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-    <nav>
+    <nav v-if="links.length > 0" >
         <img v-if="props.showIcon" src="@/assets/logo.svg" alt="Vue Logo" width="25">
         <span v-if="props.title">{{ props.title }}</span>
         <RouterLink
