@@ -1,11 +1,6 @@
 <script setup lang="ts">
 
-const props = defineProps({
-    title: {
-        type: String,
-        default: 'Hola Mundo'
-    }
-});
+const props = defineProps<{ title?: string }>();
 
 </script>
 
@@ -13,7 +8,7 @@ const props = defineProps({
 <template>
     <nav>
         <img src="@/assets/logo.svg" alt="Vue Logo" width="25">
-        <span>{{ props.title }}</span>
+        <span>{{ props.title || 'No Titlle' }}</span>
         <RouterLink to="/">Inicio</RouterLink>
         <RouterLink to="/about">Sobre</RouterLink>
     </nav>
