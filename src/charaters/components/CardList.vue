@@ -1,21 +1,23 @@
 <script setup lang="ts">
-
-import breakingBadApi from '../../api/breakingBadApi';
+// import { ref } from 'vue';
+import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/charaters/interfaces/characters.interface';
 
+const { data: characters } = await breakingBadApi.get<Character[]>('/characters');
 
-breakingBadApi.get<Character>('/characters').then(resp => {
-    console.log({ data: resp.data });
+// const characters = ref<Character[]>(data)
+
+// breakingBadApi.get<Character[]>('/characters').then(resp => {
     
-})
+//     characters.value = resp.data;
+    
+// })
+
 </script>
 
 <template>
     <ul>
-        <li>Hola</li>
-        <li>Hola</li>
-        <li>Hola</li>
-        <li>Hola</li>
+        <li v-for="{char_id, name} of characters" :key="char_id">{{ name }}</li>
     </ul>
 </template>
 
