@@ -19,7 +19,7 @@ import NavBar from '@/shared/components/NavBar.vue'
 .wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 }
 
 </style>

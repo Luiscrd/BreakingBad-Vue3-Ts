@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
+
 </script>
 
 
@@ -19,6 +19,7 @@ nav {
     font-size: 12px;
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 10px;
     display: flex;
     align-items: flex-start;
 }
