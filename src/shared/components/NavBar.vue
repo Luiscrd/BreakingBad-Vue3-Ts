@@ -1,6 +1,10 @@
 <script setup lang="ts">
 
-const props = defineProps<{ title?: string }>();
+interface Props {
+    title: string
+}
+
+const props = defineProps<Props>();
 
 </script>
 
@@ -8,7 +12,7 @@ const props = defineProps<{ title?: string }>();
 <template>
     <nav>
         <img src="@/assets/logo.svg" alt="Vue Logo" width="25">
-        <span>{{ props.title || 'No Titlle' }}</span>
+        <span>{{ props.title }}</span>
         <RouterLink to="/">Inicio</RouterLink>
         <RouterLink to="/about">Sobre</RouterLink>
     </nav>
