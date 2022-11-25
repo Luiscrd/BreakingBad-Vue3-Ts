@@ -1,6 +1,7 @@
 import AboutPage from '@/shared/pages/AboutPage.vue';
 import HomePage from '@/shared/pages/HomePage.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import { characterRoute } from '../charaters/router/index';
 
 const router = createRouter({
 
@@ -9,13 +10,15 @@ const router = createRouter({
     routes: [
         {path: '/', name: 'home', component: HomePage},
         {path: '/about', name: 'about', component: AboutPage},
-        {
-            path: '/characters',
-            name: 'characters',
-            component: () => import('@/charaters/layout/CharaterLayout.vue'),
-        },
+        // {
+        //     path: '/characters',
+        //     name: 'characters',
+        //     component: () => import('@/charaters/layout/CharaterLayout.vue'),
+        // },
         {path: '/:pathMatch(.*)*', redirect: () => ({ name: 'home'})},
     ]
 });
+
+router.addRoute(characterRoute);
 
 export default router;
