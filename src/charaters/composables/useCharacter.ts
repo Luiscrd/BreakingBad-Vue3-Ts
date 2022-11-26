@@ -74,7 +74,7 @@ const useCharacter = (id: string) => {
             onSuccess: loadedCharacter,
             onError(error: string) {
                 errorMessage.value = error;
-                router.push('/characters/list');
+                router.replace('/characters/list');
             }
         }
     )
