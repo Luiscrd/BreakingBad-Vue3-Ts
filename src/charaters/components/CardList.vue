@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/charaters/interfaces/characters.interface';
-import { useCharacters } from '../composables/usecharacters';
+// import { useCharacters } from '../composables/usecharacters';
 import { useQuery } from '@tanstack/vue-query';
 
 //! 1- Normal suspense
@@ -18,13 +18,23 @@ import { useQuery } from '@tanstack/vue-query';
 //! 3- TanStack Query
 
 const getCharactersSlow = async(): Promise<Character[]> => {
-    const { data } = await breakingBadApi.get<Character[]>('/characters');
-    return data;
+
+    return new Promise((resolve) => {
+
+        setTimeout(async() => {
+
+            const { data } = await breakingBadApi.get<Character[]>('/characters');
+
+            resolve(data);
+            
+        }, 3000);
+    })
 }
 
 const { isLoading, isError, data: characters, error: errorMessage } = useQuery(
     ['characters'],
     getCharactersSlow,
+    { cacheTime: 1000 * 60, refetchOnReconnect: 'always' }
 )
 
 </script>
