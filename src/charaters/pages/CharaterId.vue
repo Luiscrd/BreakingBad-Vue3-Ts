@@ -11,6 +11,7 @@ const { id } = route.params as { id: string };
 
 const { isLoading, hasError, errorMessage, character } = useCharacter(id);
 
+
 </script>
 
 <template>
@@ -57,7 +58,7 @@ const { isLoading, hasError, errorMessage, character } = useCharacter(id);
     margin-right: 5%;
 }
 
-li {
+li, button {
     margin-top: 20px;
 }
 

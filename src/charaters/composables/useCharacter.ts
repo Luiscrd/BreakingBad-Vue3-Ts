@@ -2,6 +2,7 @@ import { computed, ref } from 'vue';
 import type { Character } from "@/charaters/interfaces/characters.interface";
 import breakingBadApi from '@/api/breakingBadApi';
 import { useQuery } from '@tanstack/vue-query';
+import { useRouter } from 'vue-router';
 
 const characterSet = ref<{ [id: string]: Character }>({})
 
@@ -59,6 +60,8 @@ const loadedCharacter = (character: Character) => {
 
 const useCharacter = (id: string) => {
 
+    const router = useRouter();
+
     useQuery(
 
         ['character', id],
@@ -71,6 +74,7 @@ const useCharacter = (id: string) => {
             onSuccess: loadedCharacter,
             onError(error: string) {
                 errorMessage.value = error;
+                router.push('/characters/list');
             }
         }
     )
