@@ -3,8 +3,29 @@ import { ref } from 'vue';
 import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/charaters/interfaces/characters.interface';
 import { useCharacters } from '../composables/usecharacters';
+import { useQuery } from '@tanstack/vue-query';
 
-const { isLoading, characters, hasError, errorMessage } = useCharacters();
+//! 1- Normal suspense
+
+// const { data: characters } = await breakingBadApi.get<Character[]>('/characters');
+
+// const characters = ref<Character[]>(data)
+
+//! 2- Composable fuctions
+
+// const { isLoading, characters, isError, errorMessage } = useCharacters();
+
+//! 3- TanStack Query
+
+const getCharactersSlow = async(): Promise<Character[]> => {
+    const { data } = await breakingBadApi.get<Character[]>('/characters');
+    return data;
+}
+
+const { isLoading, isError, data: characters, error: errorMessage } = useQuery(
+    ['characters'],
+    getCharactersSlow,
+)
 
 </script>
 
@@ -14,7 +35,7 @@ const { isLoading, characters, hasError, errorMessage } = useCharacters();
         <img src="@/assets/bomb.png" class="bomb spin" alt="Bomb">
         <h3>Espere por favor...</h3>
     </div>
-    <div v-if="hasError" class="error fade">
+    <div v-if="isError" class="error fade">
         <h1>ERROR!!</h1>
         <img src="@/assets/skull.png" class="alert" alt="Alert">
         <h3>Ocurrio un error</h3>
@@ -26,7 +47,8 @@ const { isLoading, characters, hasError, errorMessage } = useCharacters();
 </template>
 
 <style scoped>
-.loading, .error {
+.loading,
+.error {
     position: fixed;
     top: 0;
     left: 0;

@@ -7,15 +7,11 @@ const characters = ref<Character[]>([]);
 
 const isLoading = ref<boolean>(true);
 
-const hasError = ref<boolean>(false);
+const isError = ref<boolean>(false);
 
 const errorMessage = ref<string>();
 
 export const useCharacters = () => {
-
-    // const { data: characters } = await breakingBadApi.get<Character[]>('/characters');
-
-    // const characters = ref<Character[]>(data)
 
     onMounted(async() => {
 
@@ -40,7 +36,7 @@ export const useCharacters = () => {
 
         } catch (error) {
 
-            hasError.value = true;
+            isError.value = true;
             
             console.error(error);
 
@@ -60,7 +56,7 @@ export const useCharacters = () => {
     return {
         characters,
         isLoading,
-        hasError,
+        isError,
         errorMessage,
         loadCharacters
     }
