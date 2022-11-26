@@ -17,9 +17,28 @@ const getCharacter = async (id: string): Promise<Character> => {
 
     if (characterSet.value[id]) return characterSet.value[id];
 
-    const { data } = await breakingBadApi.get<Character[]>(`/characters/${id}`);
+    try {
 
-    return data[0];
+        hasError.value = false;
+
+        const { data } = await breakingBadApi.get<Character[]>(`/characters/${id}`);
+
+        if (data.length > 0) return data[0];
+
+        throw new Error(`No se encontro un personaje con el id: ${id}`);
+        
+    } catch (error: any) {
+        
+        hasError.value = true;
+
+        errorMessage.value = error.message;
+        
+        isLoading.value = false;
+
+        throw new Error(error);
+    }
+
+
 
 }
 
