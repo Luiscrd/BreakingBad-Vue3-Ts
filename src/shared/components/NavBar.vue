@@ -10,20 +10,17 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
     showIcon: true,
     links: () => [],
-}) ;
+});
 
 </script>
 
 <template>
-    <nav v-if="links.length > 0" >
-        <img v-if="props.showIcon" src="@/assets/logo.svg" alt="Vue Logo" width="25">
+    <nav v-if="links.length > 0">
+        <img v-if="props.showIcon" src="@/assets/brebad3.png" alt="Vue Logo">
         <span v-if="props.title">{{ props.title }}</span>
-        <RouterLink
-            v-for="link of props.links"
-            :key="link.path"
-            :to="link.path"
-            >{{ link.title }}</RouterLink>
+        <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{ link.title }}</RouterLink>
     </nav>
+    
 </template>
 
 <style scoped>
@@ -34,19 +31,25 @@ nav {
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 
 img {
-    width: 25px;
-    margin-right: 5px;
+    width: 40px;
+    margin-right: 15px;
 }
 
 span {
-    margin-right: 10px;
+    margin-right: 15px;
+    font-size: 2em;
 }
 
 a {
-    margin-right: 5px;
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+a:hover{
+    color: gray;
 }
 </style>
