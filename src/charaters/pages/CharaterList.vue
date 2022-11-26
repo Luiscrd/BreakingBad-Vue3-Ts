@@ -7,6 +7,8 @@ import characterStore from '@/store/chararcters.store';
 
 const props = defineProps<{ title: string, visible: boolean }>();
 
+characterStore.startLoadigCharacters();
+
 const getCharactersCaheFirst = async (): Promise<Character[]> => {
     
     if (characterStore.characters.count > 0) {
@@ -15,8 +17,6 @@ const getCharactersCaheFirst = async (): Promise<Character[]> => {
         
     }
     
-    characterStore.startLoadigCharacters();
-
     const { data } = await breakingBadApi.get<Character[]>('/characters');
 
     return data;

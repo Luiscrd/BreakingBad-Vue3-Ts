@@ -10,19 +10,19 @@ export const characterRoute: RouteRecordRaw = {
     component: CharaterLayout,
     children: [
         {
-            path: 'by/id',
+            path: 'by/:id',
             name: 'character-id', 
             component: CharaterId,
             props: { title: 'Por Id', visible: false }
         },
         { 
-            path: 'list',
+            path: '/characters/list',
             name: 'character-list',
             component: CharaterList,
             props: { title: 'Lista', visible: true }
         },
         { 
-            path: 'search',
+            path: '/characters/search',
             name: 'character-search',
             component: CharaterSearch,
             props: { title: 'Busqueda', visible: true }
