@@ -5,6 +5,7 @@ import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/charaters/interfaces/characters.interface';
 import { useQuery } from '@tanstack/vue-query';
 
+
 defineProps<{ title: string, visible: boolean }>();
 
 const route = useRoute();
@@ -22,7 +23,7 @@ const getCharacterCacheFirst = async (characterId: string): Promise<Character> =
     characterStore.startLoadigCharacter();
 
     const { data } = await breakingBadApi.get<Character[]>(`/characters/${characterId}`);
-
+    
     return data[0];
 
 }
@@ -55,20 +56,32 @@ const { data: character } = useQuery(
             <h4>{{ characterStore.ids.errorMessage }}</h4>
         </div>
     </div>
-    <div>
-        <h1>{{ character?.name }}</h1>
-        <div class="d-flex">
-            <img :src="character?.img" :alt="character?.name" class="img-charter">
-
-        </div>
+    <h1>{{ character?.name }}</h1>
+    <div class="character-container">
+        <img :src="character?.img" :alt="character?.name" class="img-charter">
+        <ul>
+            <li>Apodo: {{ character?.nickname }}.</li>
+            <li>Nació: {{ character?.birthday }}.</li>
+            <li>Serie: {{ character?.category }}.</li>
+            <li>Ocupación: {{ character?.occupation.join(', ') }}.</li>
+            <li>Actor: {{ character?.portrayed }}.</li>
+            <li>Estado: {{ character?.status }}.</li>
+            <li>Temporadas: {{ character?.appearance.join(', ') }}.</li>
+        </ul>
     </div>
 </template>
 
 <style scoped>
+.character-container {
+    display: flex;
+    flex-direction: row;
+}
+
 .img-charter {
     width: 45%;
     margin-top: 10px;
     border-radius: 5px;
+    margin-right: 5%;
 }
 
 .loading,
