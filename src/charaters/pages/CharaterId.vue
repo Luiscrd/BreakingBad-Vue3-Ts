@@ -5,6 +5,7 @@ import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/charaters/interfaces/characters.interface';
 import { useQuery } from '@tanstack/vue-query';
 
+defineProps<{ title: string, visible: boolean }>();
 
 const route = useRoute();
 
@@ -17,6 +18,8 @@ const getCharacterCacheFirst = async (characterId: string): Promise<Character> =
         return characterStore.ids.list[characterId];
 
     }
+
+    characterStore.startLoadigCharacter();
 
     const { data } = await breakingBadApi.get<Character[]>(`/characters/${characterId}`);
 
@@ -39,19 +42,66 @@ const { data: character } = useQuery(
 </script>
 
 <template>
+    <div v-if="characterStore.ids.isLodaing" class="loading">
+        <h1>Loading</h1>
+        <img src="@/assets/bomb.png" class="bomb spin" alt="Bomb">
+        <h3>Espere por favor...</h3>
+    </div>
+    <div v-if="characterStore.ids.hasError" class="error">
+        <div class="error-int fade">
+            <h1>WARNING</h1>
+            <img src="@/assets/skull.png" class="alert" alt="Alert">
+            <h3>Ocurrio un error</h3>
+            <h4>{{ characterStore.ids.errorMessage }}</h4>
+        </div>
+    </div>
     <div>
         <h1>{{ character?.name }}</h1>
         <div class="d-flex">
-            <img :src="character?.img" :alt="character?.name">
+            <img :src="character?.img" :alt="character?.name" class="img-charter">
 
         </div>
     </div>
 </template>
 
 <style scoped>
-img {
+.img-charter {
     width: 45%;
     margin-top: 10px;
     border-radius: 5px;
+}
+
+.loading,
+.error {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.error-int {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bomb {
+    width: 50px;
+    margin: 40px 0;
+    opacity: 0.64;
+}
+
+.alert {
+    width: 80px;
+    margin: 10px 0;
+    opacity: 0.64;
 }
 </style>

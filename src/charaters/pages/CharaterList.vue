@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/vue-query';
 import type { Character } from '@/charaters/interfaces/characters.interface';
 import characterStore from '@/store/chararcters.store';
 
-// const props = defineProps<{ title: string, visible: boolean }>();
+defineProps<{ title: string, visible: boolean }>();
 
 characterStore.startLoadigCharacters();
 
