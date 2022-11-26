@@ -1,0 +1,428 @@
+.beat {
+  -webkit-animation-name: beat;
+  animation-name: beat;
+  -webkit-animation-delay: var(--animation-delay, 0s);
+  animation-delay: var(--animation-delay, 0s);
+  -webkit-animation-direction: var(--animation-direction, normal);
+  animation-direction: var(--animation-direction, normal);
+  -webkit-animation-duration: var(--animation-duration, 1s);
+  animation-duration: var(--animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--animation-iteration-count, infinite);
+  animation-iteration-count: var(--animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--animation-timing, ease-in-out);
+  animation-timing-function: var(--animation-timing, ease-in-out);
+}
+
+.bounce {
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-animation-delay: var(--animation-delay, 0s);
+  animation-delay: var(--animation-delay, 0s);
+  -webkit-animation-direction: var(--animation-direction, normal);
+  animation-direction: var(--animation-direction, normal);
+  -webkit-animation-duration: var(--animation-duration, 1s);
+  animation-duration: var(--animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--animation-iteration-count, infinite);
+  animation-iteration-count: var(--animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));
+  animation-timing-function: var(--animation-timing, cubic-bezier(0.28, 0.84, 0.42, 1));
+}
+
+.fade {
+  -webkit-animation-name: fade;
+  animation-name: fade;
+  -webkit-animation-delay: var(--animation-delay, 0s);
+  animation-delay: var(--animation-delay, 0s);
+  -webkit-animation-direction: var(--animation-direction, normal);
+  animation-direction: var(--animation-direction, normal);
+  -webkit-animation-duration: var(--animation-duration, 1s);
+  animation-duration: var(--animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--animation-iteration-count, infinite);
+  animation-iteration-count: var(--animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+  animation-timing-function: var(--animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+}
+
+.beat-fade {
+  -webkit-animation-name: beat-fade;
+  animation-name: beat-fade;
+  -webkit-animation-delay: var(--animation-delay, 0s);
+  animation-delay: var(--animation-delay, 0s);
+  -webkit-animation-direction: var(--animation-direction, normal);
+  animation-direction: var(--animation-direction, normal);
+  -webkit-animation-duration: var(--animation-duration, 1s);
+  animation-duration: var(--animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--animation-iteration-count, infinite);
+  animation-iteration-count: var(--animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+  animation-timing-function: var(--animation-timing, cubic-bezier(0.4, 0, 0.6, 1));
+}
+
+.flip {
+  -webkit-animation-name: flip;
+  animation-name: flip;
+  -webkit-animation-delay: var(--animation-delay, 0s);
+  animation-delay: var(--animation-delay, 0s);
+  -webkit-animation-direction: var(--animation-direction, normal);
+  animation-direction: var(--animation-direction, normal);
+  -webkit-animation-duration: var(--animation-duration, 1s);
+  animation-duration: var(--animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--animation-iteration-count, infinite);
+  animation-iteration-count: var(--animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--animation-timing, ease-in-out);
+  animation-timing-function: var(--animation-timing, ease-in-out);
+}
+
+.shake {
+  -webkit-animation-name: shake;
+  animation-name: shake;
+  -webkit-animation-delay: var(--animation-delay, 0s);
+  animation-delay: var(--animation-delay, 0s);
+  -webkit-animation-direction: var(--animation-direction, normal);
+  animation-direction: var(--animation-direction, normal);
+  -webkit-animation-duration: var(--animation-duration, 1s);
+  animation-duration: var(--animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--animation-iteration-count, infinite);
+  animation-iteration-count: var(--animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--animation-timing, linear);
+  animation-timing-function: var(--animation-timing, linear);
+}
+
+.spin {
+  -webkit-animation-name: spin;
+  animation-name: spin;
+  -webkit-animation-delay: var(--animation-delay, 0s);
+  animation-delay: var(--animation-delay, 0s);
+  -webkit-animation-direction: var(--animation-direction, normal);
+  animation-direction: var(--animation-direction, normal);
+  -webkit-animation-duration: var(--animation-duration, 2s);
+  animation-duration: var(--animation-duration, 2s);
+  -webkit-animation-iteration-count: var(--animation-iteration-count, infinite);
+  animation-iteration-count: var(--animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--animation-timing, linear);
+  animation-timing-function: var(--animation-timing, linear);
+}
+
+.spin-reverse {
+  --animation-direction: reverse;
+}
+
+.pulse,
+.spin-pulse {
+  -webkit-animation-name: spin;
+  animation-name: spin;
+  -webkit-animation-direction: var(--animation-direction, normal);
+  animation-direction: var(--animation-direction, normal);
+  -webkit-animation-duration: var(--animation-duration, 1s);
+  animation-duration: var(--animation-duration, 1s);
+  -webkit-animation-iteration-count: var(--animation-iteration-count, infinite);
+  animation-iteration-count: var(--animation-iteration-count, infinite);
+  -webkit-animation-timing-function: var(--animation-timing, steps(8));
+  animation-timing-function: var(--animation-timing, steps(8));
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .beat,
+  .bounce,
+  .fade,
+  .beat-fade,
+  .flip,
+  .pulse,
+  .shake,
+  .spin,
+  .spin-pulse {
+    -webkit-animation-delay: -1ms;
+    animation-delay: -1ms;
+    -webkit-animation-duration: 1ms;
+    animation-duration: 1ms;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    transition-delay: 0s;
+    transition-duration: 0s;
+  }
+}
+
+@-webkit-keyframes beat {
+
+  0%,
+  90% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  45% {
+    -webkit-transform: scale(var(--beat-scale, 1.25));
+    transform: scale(var(--beat-scale, 1.25));
+  }
+}
+
+@keyframes beat {
+
+  0%,
+  90% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  45% {
+    -webkit-transform: scale(var(--beat-scale, 1.25));
+    transform: scale(var(--beat-scale, 1.25));
+  }
+}
+
+@-webkit-keyframes bounce {
+  0% {
+    -webkit-transform: scale(1, 1) translateY(0);
+    transform: scale(1, 1) translateY(0);
+  }
+
+  10% {
+    -webkit-transform: scale(var(--bounce-start-scale-x, 1.1), var(--bounce-start-scale-y, 0.9)) translateY(0);
+    transform: scale(var(--bounce-start-scale-x, 1.1), var(--bounce-start-scale-y, 0.9)) translateY(0);
+  }
+
+  30% {
+    -webkit-transform: scale(var(--bounce-jump-scale-x, 0.9), var(--bounce-jump-scale-y, 1.1)) translateY(var(--bounce-height, -0.5em));
+    transform: scale(var(--bounce-jump-scale-x, 0.9), var(--bounce-jump-scale-y, 1.1)) translateY(var(--bounce-height, -0.5em));
+  }
+
+  50% {
+    -webkit-transform: scale(var(--bounce-land-scale-x, 1.05), var(--bounce-land-scale-y, 0.95)) translateY(0);
+    transform: scale(var(--bounce-land-scale-x, 1.05), var(--bounce-land-scale-y, 0.95)) translateY(0);
+  }
+
+  57% {
+    -webkit-transform: scale(1, 1) translateY(var(--bounce-rebound, -0.125em));
+    transform: scale(1, 1) translateY(var(--bounce-rebound, -0.125em));
+  }
+
+  64% {
+    -webkit-transform: scale(1, 1) translateY(0);
+    transform: scale(1, 1) translateY(0);
+  }
+
+  100% {
+    -webkit-transform: scale(1, 1) translateY(0);
+    transform: scale(1, 1) translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    -webkit-transform: scale(1, 1) translateY(0);
+    transform: scale(1, 1) translateY(0);
+  }
+
+  10% {
+    -webkit-transform: scale(var(--bounce-start-scale-x, 1.1), var(--bounce-start-scale-y, 0.9)) translateY(0);
+    transform: scale(var(--bounce-start-scale-x, 1.1), var(--bounce-start-scale-y, 0.9)) translateY(0);
+  }
+
+  30% {
+    -webkit-transform: scale(var(--bounce-jump-scale-x, 0.9), var(--bounce-jump-scale-y, 1.1)) translateY(var(--bounce-height, -0.5em));
+    transform: scale(var(--bounce-jump-scale-x, 0.9), var(--bounce-jump-scale-y, 1.1)) translateY(var(--bounce-height, -0.5em));
+  }
+
+  50% {
+    -webkit-transform: scale(var(--bounce-land-scale-x, 1.05), var(--bounce-land-scale-y, 0.95)) translateY(0);
+    transform: scale(var(--bounce-land-scale-x, 1.05), var(--bounce-land-scale-y, 0.95)) translateY(0);
+  }
+
+  57% {
+    -webkit-transform: scale(1, 1) translateY(var(--bounce-rebound, -0.125em));
+    transform: scale(1, 1) translateY(var(--bounce-rebound, -0.125em));
+  }
+
+  64% {
+    -webkit-transform: scale(1, 1) translateY(0);
+    transform: scale(1, 1) translateY(0);
+  }
+
+  100% {
+    -webkit-transform: scale(1, 1) translateY(0);
+    transform: scale(1, 1) translateY(0);
+  }
+}
+
+@-webkit-keyframes fade {
+  50% {
+    opacity: var(--fade-opacity, 0.4);
+  }
+}
+
+@keyframes fade {
+  50% {
+    opacity: var(--fade-opacity, 0.4);
+  }
+}
+
+@-webkit-keyframes beat-fade {
+
+  0%,
+  100% {
+    opacity: var(--beat-fade-opacity, 0.4);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(var(--beat-fade-scale, 1.125));
+    transform: scale(var(--beat-fade-scale, 1.125));
+  }
+}
+
+@keyframes beat-fade {
+
+  0%,
+  100% {
+    opacity: var(--beat-fade-opacity, 0.4);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    -webkit-transform: scale(var(--beat-fade-scale, 1.125));
+    transform: scale(var(--beat-fade-scale, 1.125));
+  }
+}
+
+@-webkit-keyframes flip {
+  50% {
+    -webkit-transform: rotate3d(var(--flip-x, 0), var(--flip-y, 1), var(--flip-z, 0), var(--flip-angle, -180deg));
+    transform: rotate3d(var(--flip-x, 0), var(--flip-y, 1), var(--flip-z, 0), var(--flip-angle, -180deg));
+  }
+}
+
+@keyframes flip {
+  50% {
+    -webkit-transform: rotate3d(var(--flip-x, 0), var(--flip-y, 1), var(--flip-z, 0), var(--flip-angle, -180deg));
+    transform: rotate3d(var(--flip-x, 0), var(--flip-y, 1), var(--flip-z, 0), var(--flip-angle, -180deg));
+  }
+}
+
+@-webkit-keyframes shake {
+  0% {
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+
+  4% {
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+
+  8%,
+  24% {
+    -webkit-transform: rotate(-18deg);
+    transform: rotate(-18deg);
+  }
+
+  12%,
+  28% {
+    -webkit-transform: rotate(18deg);
+    transform: rotate(18deg);
+  }
+
+  16% {
+    -webkit-transform: rotate(-22deg);
+    transform: rotate(-22deg);
+  }
+
+  20% {
+    -webkit-transform: rotate(22deg);
+    transform: rotate(22deg);
+  }
+
+  32% {
+    -webkit-transform: rotate(-12deg);
+    transform: rotate(-12deg);
+  }
+
+  36% {
+    -webkit-transform: rotate(12deg);
+    transform: rotate(12deg);
+  }
+
+  40%,
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes shake {
+  0% {
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+  }
+
+  4% {
+    -webkit-transform: rotate(15deg);
+    transform: rotate(15deg);
+  }
+
+  8%,
+  24% {
+    -webkit-transform: rotate(-18deg);
+    transform: rotate(-18deg);
+  }
+
+  12%,
+  28% {
+    -webkit-transform: rotate(18deg);
+    transform: rotate(18deg);
+  }
+
+  16% {
+    -webkit-transform: rotate(-22deg);
+    transform: rotate(-22deg);
+  }
+
+  20% {
+    -webkit-transform: rotate(22deg);
+    transform: rotate(22deg);
+  }
+
+  32% {
+    -webkit-transform: rotate(-12deg);
+    transform: rotate(-12deg);
+  }
+
+  36% {
+    -webkit-transform: rotate(12deg);
+    transform: rotate(12deg);
+  }
+
+  40%,
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

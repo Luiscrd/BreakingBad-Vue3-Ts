@@ -4,15 +4,21 @@ import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/charaters/interfaces/characters.interface';
 import { useCharacters } from '../composables/usecharacters';
 
-const { isLoading, characters } = useCharacters();
+const { isLoading, characters, hasError, errorMessage } = useCharacters();
 
 </script>
 
 <template>
     <div v-if="isLoading" class="loading">
         <h1>Loading</h1>
-        <img src="@/assets/bomb.png" class="bomb fa-spin" alt="Bomb">
+        <img src="@/assets/bomb.png" class="bomb spin" alt="Bomb">
         <h3>Espere por favor...</h3>
+    </div>
+    <div v-if="hasError" class="error fade">
+        <h1>ERROR!!</h1>
+        <img src="@/assets/skull.png" class="alert" alt="Alert">
+        <h3>Ocurrio un error</h3>
+        <h4>{{ errorMessage }}</h4>
     </div>
     <ul>
         <li v-for="{ char_id, name } of characters" :key="char_id">{{ name }}</li>
@@ -20,7 +26,7 @@ const { isLoading, characters } = useCharacters();
 </template>
 
 <style scoped>
-.loading {
+.loading, .error {
     position: fixed;
     top: 0;
     left: 0;
@@ -40,32 +46,9 @@ const { isLoading, characters } = useCharacters();
     opacity: 0.64;
 }
 
-.fa-spin {
-    -webkit-animation: fa-spin 2s infinite linear;
-    animation: fa-spin 2s infinite linear;
-}
-
-@-webkit-keyframes fa-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes fa-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
+.alert {
+    width: 80px;
+    margin: 10px 0;
+    opacity: 0.64;
 }
 </style>

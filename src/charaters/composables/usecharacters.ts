@@ -1,6 +1,15 @@
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import breakingBadApi from '@/api/breakingBadApi';
 import type { Character } from '@/charaters/interfaces/characters.interface';
+import axios from 'axios';
+
+const characters = ref<Character[]>([]);
+
+const isLoading = ref<boolean>(true);
+
+const hasError = ref<boolean>(false);
+
+const errorMessage = ref<string>();
 
 export const useCharacters = () => {
 
@@ -8,19 +17,52 @@ export const useCharacters = () => {
 
     // const characters = ref<Character[]>(data)
 
-    const characters = ref<Character[]>([]);
+    onMounted(async() => {
 
-    const isLoading = ref<boolean>(true);
+        await loadCharacters();
 
-    breakingBadApi.get<Character[]>('/characters')
-        .then(resp => {
-            characters.value = resp.data;
+    });
+
+    const loadCharacters = async () => {
+        
+        isLoading.value = true;
+
+        if (characters.value.length > 0) return;
+
+        try {
+            
+            const { data } = await breakingBadApi.get<Character[]>('/characters');
+
+            
+            characters.value = data;
+            
             isLoading.value = false;
-        })
+
+        } catch (error) {
+
+            hasError.value = true;
+            
+            console.error(error);
+
+            if(axios.isAxiosError(error)) {
+                
+                return errorMessage.value = error.message;
+
+            }
+
+            errorMessage.value = JSON.stringify(error);
+            
+        }
+
+    }
+
 
     return {
         characters,
-        isLoading
+        isLoading,
+        hasError,
+        errorMessage,
+        loadCharacters
     }
 
 }

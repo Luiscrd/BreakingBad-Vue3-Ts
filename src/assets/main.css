@@ -1,4 +1,5 @@
 @import './base.css';
+@import './efects.css';
 
 #app {
   /* margin: 0 auto; */
@@ -26,10 +27,9 @@ a,
 
 .router-link-active {
   color: #a09c9c !important;
-
+  cursor: default;
 }
 
 /* .router-link-exact-active {
   
 } */
-
