@@ -22,12 +22,10 @@ const getCharactersSlow = async(): Promise<Character[]> => {
     return new Promise((resolve) => {
 
         setTimeout(async() => {
-
             const { data } = await breakingBadApi.get<Character[]>('/characters');
-
             resolve(data);
-            
         }, 3000);
+        
     })
 }
 
