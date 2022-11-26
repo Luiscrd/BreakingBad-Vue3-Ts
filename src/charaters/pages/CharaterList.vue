@@ -5,27 +5,27 @@ import { useQuery } from '@tanstack/vue-query';
 import type { Character } from '@/charaters/interfaces/characters.interface';
 import characterStore from '@/store/chararcters.store';
 
-
 const props = defineProps<{ title: string, visible: boolean }>();
 
-const getCharacters = async (): Promise<Character[]> => {
+const getCharactersCaheFirst = async (): Promise<Character[]> => {
+
+    if (characterStore.characters.count > 0) {
+
+        return characterStore.characters.list;
+
+    }
 
     characterStore.startLoadigCharacters();
 
     const { data } = await breakingBadApi.get<Character[]>('/characters');
 
-    data[13].img = 'https://vignette.wikia.nocookie.net/breakingbad/images/8/87/Lydia_BCS_309.png';
-    data[16].img = 'http://2.bp.blogspot.com/-LoxZoCTsGYw/Uhq-pI0zBeI/AAAAAAAAFKQ/94qJhZZXMDM/s1600/skinny+pete.jpg';
-    data[38].img = 'https://conteudo.imguol.com.br/c/entretenimento/2c/2018/08/02/breaking-bad---walter-white-e-holly-1533248533648_v2_300x420.jpg';
-
     return data;
 
 }
 
-// const { isLoading, data } = useQuery(
 useQuery(
     ['characters'],
-    getCharacters,
+    getCharactersCaheFirst,
     { 
         cacheTime: 1000 * 60,
         refetchOnReconnect: 'always',
