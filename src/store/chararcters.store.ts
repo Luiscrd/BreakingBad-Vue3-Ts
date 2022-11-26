@@ -38,7 +38,13 @@ const characterStore = reactive<Store>({
 
     },
 
-    loadedCharacters(data: Character[]) {
+    loadedCharacters(data: Character[] | string) {
+
+        if (typeof data === 'string') {
+
+            return this.loadedCharactersFailed('La respuesta no es un arreglo de personajes.');
+
+        }
 
         data[13].img = 'https://vignette.wikia.nocookie.net/breakingbad/images/8/87/Lydia_BCS_309.png';
         data[16].img = 'http://2.bp.blogspot.com/-LoxZoCTsGYw/Uhq-pI0zBeI/AAAAAAAAFKQ/94qJhZZXMDM/s1600/skinny+pete.jpg';
@@ -68,6 +74,6 @@ const characterStore = reactive<Store>({
 
 });
 
-characterStore.startLoadigCharacters();
+// characterStore.startLoadigCharacters();
 
 export default characterStore;

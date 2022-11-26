@@ -8,13 +8,13 @@ import characterStore from '@/store/chararcters.store';
 const props = defineProps<{ title: string, visible: boolean }>();
 
 const getCharactersCaheFirst = async (): Promise<Character[]> => {
-
+    
     if (characterStore.characters.count > 0) {
-
+        
         return characterStore.characters.list;
-
+        
     }
-
+    
     characterStore.startLoadigCharacters();
 
     const { data } = await breakingBadApi.get<Character[]>('/characters');
@@ -26,7 +26,7 @@ const getCharactersCaheFirst = async (): Promise<Character[]> => {
 useQuery(
     ['characters'],
     getCharactersCaheFirst,
-    { 
+    {
         cacheTime: 1000 * 60,
         refetchOnReconnect: 'always',
         onSuccess(data) {
@@ -43,11 +43,13 @@ useQuery(
         <img src="@/assets/bomb.png" class="bomb spin" alt="Bomb">
         <h3>Espere por favor...</h3>
     </div>
-    <div v-if="characterStore.characters.hasError" class="error fade">
-        <h1>ERROR!!</h1>
-        <img src="@/assets/skull.png" class="alert" alt="Alert">
-        <h3>Ocurrio un error</h3>
-        <h4>{{ characterStore.characters.errorMessage }}</h4>
+    <div v-if="characterStore.characters.hasError" class="error">
+        <div class="error-int fade">
+            <h1>WARNING</h1>
+            <img src="@/assets/skull.png" class="alert" alt="Alert">
+            <h3>Ocurrio un error</h3>
+            <h4>{{ characterStore.characters.errorMessage }}</h4>
+        </div>
     </div>
     <h2>{{ props.title }}</h2>
     <CardList :characters="characterStore.characters.list" />
@@ -67,6 +69,17 @@ useQuery(
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.error-int {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h3 {
+    margin-bottom: 30px;
 }
 
 .bomb {
