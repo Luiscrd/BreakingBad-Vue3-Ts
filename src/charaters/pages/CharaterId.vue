@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import characterStore from '@/store/chararcters.store';
-import breakingBadApi from '@/api/breakingBadApi';
-import type { Character } from '@/charaters/interfaces/characters.interface';
-import { useQuery } from '@tanstack/vue-query';
+import useCharacter from '@/charaters/composables/useCharacter';
 
 
 defineProps<{ title: string, visible: boolean }>();
@@ -12,63 +9,39 @@ const route = useRoute();
 
 const { id } = route.params as { id: string };
 
-const getCharacterCacheFirst = async (characterId: string): Promise<Character> => {
-
-    if (characterStore.checkIdInStore(characterId)) {
-
-        return characterStore.ids.list[characterId];
-
-    }
-
-    characterStore.startLoadigCharacter();
-
-    const { data } = await breakingBadApi.get<Character[]>(`/characters/${characterId}`);
-    
-    return data[0];
-
-}
-
-const { data: character } = useQuery(
-    ['character', id],
-    () => getCharacterCacheFirst(id),
-    {
-        cacheTime: 1000 * 60,
-        refetchOnReconnect: 'always',
-        onSuccess(character: Character) {
-            characterStore.loadedCharacter(character)
-        },
-    }
-)
+const { isLoading, hasError, errorMessage, character } = useCharacter(id);
 
 </script>
 
 <template>
-    <div v-if="characterStore.ids.isLodaing" class="loading">
+    <div v-if="isLoading" class="loading">
         <h1>Loading</h1>
         <img src="@/assets/bomb.png" class="bomb spin" alt="Bomb">
         <h3>Espere por favor...</h3>
     </div>
-    <div v-if="characterStore.ids.hasError" class="error">
+    <div v-if="hasError" class="error">
         <div class="error-int fade">
             <h1>WARNING</h1>
             <img src="@/assets/skull.png" class="alert" alt="Alert">
             <h3>Ocurrio un error</h3>
-            <h4>{{ characterStore.ids.errorMessage }}</h4>
+            <h4>{{ errorMessage }}</h4>
         </div>
     </div>
-    <h1>{{ character?.name }}</h1>
-    <div class="character-container">
-        <img :src="character?.img" :alt="character?.name" class="img-charter">
-        <ul>
-            <li>Apodo: {{ character?.nickname }}.</li>
-            <li>Nació: {{ character?.birthday }}.</li>
-            <li>Serie: {{ character?.category }}.</li>
-            <li>Ocupación: {{ character?.occupation.join(', ') }}.</li>
-            <li>Actor: {{ character?.portrayed }}.</li>
-            <li>Estado: {{ character?.status }}.</li>
-            <li>Temporadas: {{ character?.appearance.join(', ') }}.</li>
-        </ul>
-    </div>
+    <template v-if="character">
+        <h1>{{ character.name }}</h1>
+        <div class="character-container">
+            <img :src="character.img" :alt="character.name" class="img-charter">
+            <ul>
+                <li>Apodo: {{ character.nickname }}.</li>
+                <li>Nació: {{ character.birthday }}.</li>
+                <li>Serie: {{ character.category }}.</li>
+                <li>Ocupación: {{ character.occupation.join(', ') }}.</li>
+                <li>Actor: {{ character.portrayed }}.</li>
+                <li>Estado: {{ character.status }}.</li>
+                <li>Temporadas: {{ character.appearance.join(', ') }}.</li>
+            </ul>
+        </div>
+    </template>
 </template>
 
 <style scoped>
@@ -82,6 +55,10 @@ const { data: character } = useQuery(
     margin-top: 10px;
     border-radius: 5px;
     margin-right: 5%;
+}
+
+li {
+    margin-top: 20px;
 }
 
 .loading,

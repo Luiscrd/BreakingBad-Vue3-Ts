@@ -1,60 +1,29 @@
 <script setup lang="ts">
-import breakingBadApi from '@/api/breakingBadApi';
 import CardList from '@/charaters/components/CardList.vue';
-import { useQuery } from '@tanstack/vue-query';
-import type { Character } from '@/charaters/interfaces/characters.interface';
-import characterStore from '@/store/chararcters.store';
+import useCharacters from '@/charaters/composables/useCharacters';
+
+const { isLoading, hasError, errorMessage, characters } = useCharacters();
 
 defineProps<{ title: string, visible: boolean }>();
-
-characterStore.startLoadigCharacters();
-
-const getCharactersCaheFirst = async (): Promise<Character[]> => {
-
-    if (characterStore.characters.count > 0) {
-
-        return characterStore.characters.list;
-
-    }
-
-    const { data } = await breakingBadApi.get<Character[]>('/characters');
-
-    characterStore.loadedCharacters(data);
-
-    return data;
-
-}
-
-useQuery(
-    ['characters'],
-    getCharactersCaheFirst,
-    {
-        cacheTime: 1000 * 60,
-        refetchOnReconnect: 'always',
-        onSuccess(data: Character[]) {
-            characterStore.loadedCharacters(data);
-        },
-    }
-)
 
 </script>
 
 <template>
-    <div v-if="characterStore.characters.isLoading" class="loading">
+    <div v-if="isLoading" class="loading">
         <h1>Loading</h1>
         <img src="@/assets/bomb.png" class="bomb spin" alt="Bomb">
         <h3>Espere por favor...</h3>
     </div>
-    <div v-if="characterStore.characters.hasError" class="error">
+    <div v-if="hasError" class="error">
         <div class="error-int fade">
             <h1>WARNING</h1>
             <img src="@/assets/skull.png" class="alert" alt="Alert">
             <h3>Ocurrio un error</h3>
-            <h4>{{ characterStore.characters.errorMessage }}</h4>
+            <h4>{{ errorMessage }}</h4>
         </div>
     </div>
     <!-- <h2>{{ props.title }}</h2> -->
-    <CardList :characters="characterStore.characters.list" class="list" />
+    <CardList :characters="characters" class="list" />
 </template>
 
 <style scoped>
