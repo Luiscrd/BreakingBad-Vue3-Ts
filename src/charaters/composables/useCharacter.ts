@@ -21,6 +21,8 @@ const getCharacter = async (id: string): Promise<Character> => {
 
         hasError.value = false;
 
+        errorMessage.value = null;
+
         const { data } = await breakingBadApi.get<Character[]>(`/characters/${id}`);
 
         if (data.length > 0) return data[0];
@@ -66,7 +68,10 @@ const useCharacter = (id: string) => {
         {
             cacheTime: 1000 * 60,
             refetchOnReconnect: 'always',
-            onSuccess: loadedCharacter
+            onSuccess: loadedCharacter,
+            onError(error: string) {
+                errorMessage.value = error;
+            }
         }
     )
 
