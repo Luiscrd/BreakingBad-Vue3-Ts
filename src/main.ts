@@ -3,6 +3,7 @@ import App from '@/App.vue';
 import '@/assets/main.css';
 import router from '@/router';
 import { VueQueryPlugin } from '@tanstack/vue-query';
+import '@/store/chararcters.store';
 
 const app = createApp(App);
 

@@ -3,11 +3,14 @@ import breakingBadApi from '@/api/breakingBadApi';
 import CardList from '@/charaters/components/CardList.vue';
 import { useQuery } from '@tanstack/vue-query';
 import type { Character } from '@/charaters/interfaces/characters.interface';
+import characterStore from '@/store/chararcters.store';
 
 
 const props = defineProps<{ title: string, visible: boolean }>();
 
 const getCharacters = async (): Promise<Character[]> => {
+
+    characterStore.startLoadigCharacters();
 
     const { data } = await breakingBadApi.get<Character[]>('/characters');
 
@@ -19,30 +22,35 @@ const getCharacters = async (): Promise<Character[]> => {
 
 }
 
-const { isError, isLoading, data: characters, error: errorMessage } = useQuery(
+// const { isLoading, data } = useQuery(
+useQuery(
     ['characters'],
     getCharacters,
-    { cacheTime: 1000 * 60, refetchOnReconnect: 'always' }
+    { 
+        cacheTime: 1000 * 60,
+        refetchOnReconnect: 'always',
+        onSuccess(data) {
+            characterStore.loadedCharacters(data);
+        },
+    }
 )
 
 </script>
 
 <template>
-    <div v-if="isLoading" class="loading">
+    <div v-if="characterStore.characters.isLoading" class="loading">
         <h1>Loading</h1>
         <img src="@/assets/bomb.png" class="bomb spin" alt="Bomb">
         <h3>Espere por favor...</h3>
     </div>
-    <div v-if="isError" class="error fade">
+    <div v-if="characterStore.characters.hasError" class="error fade">
         <h1>ERROR!!</h1>
         <img src="@/assets/skull.png" class="alert" alt="Alert">
         <h3>Ocurrio un error</h3>
-        <h4>{{ errorMessage }}</h4>
+        <h4>{{ characterStore.characters.errorMessage }}</h4>
     </div>
-    <template v-if="characters">
-        <h2>{{ props.title }}</h2>
-        <CardList :characters="characters" />
-    </template>
+    <h2>{{ props.title }}</h2>
+    <CardList :characters="characterStore.characters.list" />
 </template>
 
 <style scoped>
