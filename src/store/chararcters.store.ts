@@ -1,4 +1,4 @@
-import breakingBadApi from "@/api/breakingBadApi";
+// import breakingBadApi from "@/api/breakingBadApi";
 import type { Character } from "@/charaters/interfaces/characters.interface";
 import { reactive } from "vue";
 
@@ -53,9 +53,9 @@ const characterStore = reactive<Store>({
 
         this.characters.isLoading = true;
 
-        const { data } = await breakingBadApi.get<Character[]>('/characters');
+        // const { data } = await breakingBadApi.get<Character[]>('/characters');
 
-        this.loadedCharacters(data);
+        // this.loadedCharacters(data);
 
     },
 
@@ -115,11 +115,11 @@ const characterStore = reactive<Store>({
         this.ids.isLodaing = false;
 
         this.ids.list[character.char_id] = character;
-        
+
     },
 
 });
 
-// characterStore.startLoadigCharacters();
+characterStore.startLoadigCharacters();
 
 export default characterStore;

@@ -4,7 +4,7 @@ import type { RouterLink } from '@/router/link-routes';
 interface Props {
     title?: string,
     links: RouterLink[],
-    showIcon?: boolean
+    showIcon?: boolean,
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -16,7 +16,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
     <nav v-if="links.length > 0">
-        <img v-if="props.showIcon" src="@/assets/brebad3.png" alt="Vue Logo">
+        <img v-if="props.showIcon" src="@/assets/brebad6.png" alt="Vue Logo">
+        <img v-else src="@/assets/brebad3.png" alt="Vue Logo">
+
         <span v-if="props.title">{{ props.title }}</span>
         <RouterLink v-for="link of props.links" :key="link.path" :to="link.path">{{ link.title }}</RouterLink>
     </nav>
@@ -37,11 +39,13 @@ nav {
 img {
     width: 40px;
     margin-right: 15px;
+    border-radius: 3px;
 }
 
 span {
     margin-right: 15px;
     font-size: 2em;
+    color: rgb(222, 220, 220);
 }
 
 a {

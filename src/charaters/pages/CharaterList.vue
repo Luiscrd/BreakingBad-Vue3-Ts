@@ -5,19 +5,21 @@ import { useQuery } from '@tanstack/vue-query';
 import type { Character } from '@/charaters/interfaces/characters.interface';
 import characterStore from '@/store/chararcters.store';
 
-const props = defineProps<{ title: string, visible: boolean }>();
+// const props = defineProps<{ title: string, visible: boolean }>();
 
 characterStore.startLoadigCharacters();
 
 const getCharactersCaheFirst = async (): Promise<Character[]> => {
-    
+
     if (characterStore.characters.count > 0) {
-        
+
         return characterStore.characters.list;
-        
+
     }
-    
+
     const { data } = await breakingBadApi.get<Character[]>('/characters');
+
+    characterStore.loadedCharacters(data);
 
     return data;
 
@@ -29,7 +31,7 @@ useQuery(
     {
         cacheTime: 1000 * 60,
         refetchOnReconnect: 'always',
-        onSuccess(data) {
+        onSuccess(data: Character[]) {
             characterStore.loadedCharacters(data);
         },
     }
@@ -51,8 +53,8 @@ useQuery(
             <h4>{{ characterStore.characters.errorMessage }}</h4>
         </div>
     </div>
-    <h2>{{ props.title }}</h2>
-    <CardList :characters="characterStore.characters.list" />
+    <!-- <h2>{{ props.title }}</h2> -->
+    <CardList :characters="characterStore.characters.list" class="list" />
 </template>
 
 <style scoped>
@@ -80,6 +82,10 @@ useQuery(
 
 h3 {
     margin-bottom: 30px;
+}
+
+.list {
+    margin-top: 7px;
 }
 
 .bomb {

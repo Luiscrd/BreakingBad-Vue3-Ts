@@ -17,8 +17,7 @@ const routerLinks: RouterLink[] = characterRoute.children!
 </script>
 
 <template>
-    <h1>Personajes</h1>
-    <NavBar :links="routerLinks" :show-icon="false" />
+    <NavBar title="Personajes" :links="routerLinks" :show-icon="false" />
     <hr>
     <!-- <Suspense> -->
         <RouterView />
