@@ -13,6 +13,8 @@ const errorMessage = ref<string | null>(null);
 
 const getCharacter = async (id: string): Promise<Character> => {
 
+    isLoading.value = true;
+
     if (characterSet.value[id]) return characterSet.value[id];
 
     const { data } = await breakingBadApi.get<Character[]>(`/characters/${id}`);

@@ -13,6 +13,8 @@ const errorMessage = ref<string | null>(null);
 
 const getCharacters = async (): Promise<Character[]> => {
 
+    isLoading.value = true;
+
     if (characters.value.length > 0) {
 
         return characters.value;
@@ -65,7 +67,6 @@ const useCharacters = () => {
         hasError,
         count: characters.value.length,
         errorMessage,
-        getCharacters,
 
     }
 
